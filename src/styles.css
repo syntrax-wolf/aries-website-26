@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/*
+ * ARIES design language — see AGENTS.md "Design Language" section.
+ * Tailwind v4 turns --color-* theme vars into utilities automatically,
+ * e.g. --color-navy below yields bg-navy / text-navy / border-navy / etc.
+ */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Deep navy — headings, body, wordmark, nav pill */
+  --color-navy: #171343;
+  --color-navy-soft: #2c2668;
+  /* Cream page background */
+  --color-cream: #faf3ea;
+  /* Violet — primary accent (icon tiles, links, highlights) */
+  --color-accent: #5b28d9;
+  --color-accent-soft: #7c4ff0;
+  /* Lavender surfaces (FAQ section, accent chips) */
+  --color-lavender: #efe7f9;
+}
+
+:root {
+  --ink: #171343;
+  --ink-soft: rgba(23, 19, 67, 0.66);
+  --bg-base: #faf3ea;
+  --surface: #ffffff;
+  --surface-soft: rgba(91, 40, 217, 0.05);
+  --line: rgba(23, 19, 67, 0.1);
+  --accent: #5b28d9;
+  --accent-soft: #7c4ff0;
+  --lavender: #efe7f9;
+  --pill-bg: rgba(91, 40, 217, 0.1);
+  --pill-bg-strong: rgba(91, 40, 217, 0.16);
+  --card-shadow: 0 24px 60px -30px rgba(23, 19, 67, 0.35);
+  --kicker: #5b28d9;
+}
+
+/*
+ * These resets/components are wrapped in Tailwind's named layers so that
+ * ordinary utility classes (which Tailwind puts in @layer utilities) still
+ * win the cascade. Unlayered plain CSS always beats layered CSS regardless
+ * of specificity — e.g. a bare `a { color: inherit }` would silently
+ * override `text-cream` on a <Link>, which is exactly the bug this avoids.
+ */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    background-color: var(--bg-base);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  code {
+    font-size: 0.9em;
+    border: 1px solid var(--line);
+    background: var(--surface-soft);
+    border-radius: 7px;
+    padding: 2px 7px;
+  }
+}
+
+@layer components {
+  .page-wrap {
+    width: min(1240px, calc(100% - 3rem));
+    margin-inline: auto;
+  }
+
+  /* --- Navbar --- */
+
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 500;
+    transition: color 160ms ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-link:hover,
+  .nav-link.is-active {
+    color: var(--accent);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.is-active::after {
+    transform: scaleX(1);
+  }
+
+  /* --- Shared building blocks --- */
+
+  .pill {
+    border-radius: 999px;
+    background: var(--pill-bg);
+    transition: background-color 200ms ease, transform 200ms ease;
+  }
+
+  .pill:hover {
+    background: var(--pill-bg-strong);
+    transform: translateY(-1px);
+  }
+
+  /* Highlighted phrase: violet fill with rounded backdrop (e.g. "Ctrl + F") */
+  .accent-mark {
+    color: var(--accent);
+  }
+
+  .card {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: 1.5rem;
+    box-shadow: var(--card-shadow);
+  }
+
+  /* Small violet section label with flanking rules */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .eyebrow::before,
+  .eyebrow[data-both]::after {
+    content: "";
+    width: 2rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    opacity: 0.55;
+  }
+
+  /* Violet gradient icon tile used in "What we do" + FAQ index badges */
+  .icon-tile {
+    display: grid;
+    place-items: center;
+    border-radius: 1rem;
+    color: #fff;
+    background: linear-gradient(145deg, var(--accent-soft), var(--accent));
+    box-shadow: 0 12px 24px -12px rgba(91, 40, 217, 0.6);
+  }
+
+  /* Pill tag used across inner pages (events / projects / team) */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    background: var(--surface-soft);
+  }
+
+  .tag.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .site-footer {
+    position: relative;
+    color: rgba(249, 243, 236, 0.75);
+    background:
+      linear-gradient(180deg, rgba(23, 19, 67, 0.35), rgba(45, 32, 96, 0.85)),
+      #2a2168;
+    overflow: hidden;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

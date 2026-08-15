@@ -16,20 +16,20 @@ function Alumni() {
   })
 
   return (
-    <main className="px-8 py-10 max-w-5xl">
+    <main className="page-wrap py-10">
       <h1 className="text-4xl font-bold text-navy sm:text-6xl">Alumni</h1>
       <p className="mt-4 max-w-xl text-lg text-[var(--ink-soft)]">
         Our alumni are building, leading, and inspiring across the world.
       </p>
 
-      <div className="relative mt-10 max-w-md">
+      <div className="card card--flat relative mt-10 max-w-md">
         <Search className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-[var(--ink-soft)]" />
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search alumni..."
-          className="w-full rounded-full border border-[var(--line)] bg-[var(--surface)] py-3 pr-4 pl-11 text-sm text-navy outline-none focus:border-navy/40"
+          className="w-full bg-transparent py-3 pr-4 pl-11 text-sm text-navy outline-none"
         />
       </div>
 

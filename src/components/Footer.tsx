@@ -10,14 +10,19 @@ const COLUMNS = [
       { to: '/events', label: 'Events' },
       { to: '/projects', label: 'Projects' },
       { to: '/team', label: 'Team' },
+      /* Alumni lives only in the desktop rail's bottom cluster, which is
+       * hidden below lg — without this entry the route is unreachable on
+       * mobile by any means other than typing the URL. */
+      { to: '/alumni', label: 'Alumni' },
       { to: '/about', label: 'Resources' },
     ],
   },
   {
     heading: 'Connect',
+    /* "Join Us" was a third label pointing at /contact alongside "Contact Us" —
+     * two names for one destination in the same column. Dropped. */
     links: [
       { to: '/contact', label: 'Contact Us' },
-      { to: '/contact', label: 'Join Us' },
       { to: '/contact', label: 'Newsletter' },
     ],
   },
@@ -47,7 +52,7 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.6fr]">
           {/* Brand */}
           <div className="max-w-xs">
-            <Link to="/" className="flex items-center gap-3 no-underline">
+            <Link to="/" className="-my-1 flex items-center gap-3 py-1 no-underline">
               <AriesMark className="h-9 w-9 text-cream" />
               <span className="flex flex-col leading-none">
                 <span className="text-lg font-extrabold tracking-[0.28em] text-cream">
@@ -103,7 +108,7 @@ export default function Footer() {
               <button
                 type="submit"
                 aria-label="Subscribe"
-                className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-full bg-accent text-white transition hover:bg-accent-soft"
+                className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-full bg-accent text-white transition hover:bg-accent-soft sm:h-9 sm:w-9"
               >
                 <ArrowRightIcon className="h-4 w-4" weight="bold" />
               </button>

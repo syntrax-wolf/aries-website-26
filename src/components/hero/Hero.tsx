@@ -2,6 +2,8 @@ import { useRef } from 'react'
 import { Link } from '@tanstack/react-router'
 import { ArrowRight } from '@phosphor-icons/react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import Clouds from './Clouds'
+import FallingStars from './FallingStars'
 
 const easeOut = [0.16, 1, 0.3, 1] as const
 
@@ -9,15 +11,11 @@ export default function Hero() {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
 
-  // Track scroll from the top of the hero until it has fully left the viewport.
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
   })
 
-  // Parallax: the sky/sun drifts DOWN fastest (it "sets"), the deer/cliff
-  // foreground trails behind more slowly, and the copy lifts gently. The copy
-  // keeps its full color/opacity as it scrolls — no fade.
   const range = reduce ? [0, 0] : undefined
   const sky = useTransform(scrollYProgress, [0, 1], range ?? [0, 280])
   const deer = useTransform(scrollYProgress, [0, 1], range ?? [0, 110])
@@ -26,51 +24,88 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative flex min-h-[100svh] flex-col overflow-hidden"
+      className="relative flex flex-col overflow-hidden lg:min-h-[100dvh]"
     >
-      {/* --- Parallax scene (behind everything) --- */}
-      <div className="absolute inset-0 -z-10">
-        {/* Sky */}
+      {/*
+       * Mobile only: the sky (moon + starfield) is its own boxed scene at the
+       * top of the hero — normal document flow, fixed-ish height — with the
+       * stag rendered as a separate block immediately after it. That keeps
+       * the two from ever overlapping, so the moon can't paint over the
+       * silhouette (which is what made the stag disappear entirely on narrow
+       * screens) and the stag isn't a cropped, dominant, full-bleed slab.
+       * At lg+ this box switches back to `absolute inset-0` — i.e. the exact
+       * full-bleed layer the desktop composition has always used.
+       */}
+      <div className="relative isolate h-[58dvh] max-h-[560px] min-h-[400px] overflow-hidden lg:absolute lg:inset-0 lg:z-0 lg:h-auto lg:max-h-none lg:min-h-0">
         <motion.div
           style={{ y: sky }}
-          className="absolute inset-x-0 -top-[15%] h-[140%]"
+          className="absolute inset-x-0 -top-[15%] z-0 h-[140%]"
         >
-          <img
-            src="/background.png"
-            alt=""
-            className="h-full w-full object-cover object-top"
-            fetchPriority="high"
-          />
+          <Clouds />
+          <FallingStars />
         </motion.div>
 
-        {/* Foreground deer + cliff, anchored bottom, weighted to the right */}
-        <motion.div
-          style={{ y: deer }}
-          className="absolute inset-x-0 bottom-0"
-        >
-          <img
-            src="/deer_cleaned.png"
-            alt="A stag with circuit-board antlers standing on a cliff at sunset"
-            className="h-auto w-full object-contain object-bottom select-none"
-            draggable={false}
-          />
-        </motion.div>
+        {/*
+         * Evening light. Weighted to the crown and fading out before the
+         * horizon, so the painted sunset still burns along the ridge — dusk,
+         * not night.
+         */}
+        <div
+          aria-hidden
+          className="absolute inset-0 z-[2]"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(20,16,62,0.66) 0%, rgba(28,21,76,0.44) 28%, rgba(34,24,86,0.2) 52%, rgba(23,19,67,0.04) 76%)',
+          }}
+        />
 
-        {/* Soft cream fade into the next section */}
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-cream" />
+        {/* Left-edge scrim: gives the cream headline a darker ground to sit on. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 z-[4]"
+          style={{
+            background:
+              'linear-gradient(100deg, rgba(20,16,62,0.7) 0%, rgba(23,19,67,0.46) 24%, rgba(23,19,67,0.18) 48%, rgba(23,19,67,0) 68%)',
+          }}
+        />
       </div>
 
-      {/* --- Hero copy --- */}
+      {/*
+       * Stag — a normal-flow block right after the sky scene on mobile, so it
+       * reads as its own beat below the moon rather than a cropped backdrop.
+       * At lg+: absolute, bottom-anchored, in front of the sky — byte-identical
+       * to the original desktop composition.
+       */}
+      <motion.div
+        style={{ y: deer }}
+        className="relative z-0 lg:absolute lg:inset-x-0 lg:bottom-0 lg:z-[3]"
+      >
+        <img
+          src="/deer_cleaned.png"
+          alt="A stag with circuit-board antlers standing on a cliff at sunset"
+          className="h-auto w-full object-contain object-bottom select-none"
+          draggable={false}
+        />
+        <div className="absolute inset-x-0 bottom-0 z-[5] h-28 bg-gradient-to-b from-transparent to-cream" />
+      </motion.div>
+
+      {/*
+       * Hero copy. Absolutely positioned so it overlays the sky scene (the
+       * cream text needs that dark backdrop to stay legible) rather than
+       * taking its own slot in the flow. On mobile it matches the sky box's
+       * own height exactly; at lg+ it covers the full section, reproducing
+       * the original flex-centered composition.
+       */}
       <motion.div
         style={{ y: copy }}
-        className="page-wrap relative flex flex-1 items-center pt-24 pb-40 sm:pt-20 lg:pt-16"
+        className="page-wrap absolute inset-x-0 top-0 z-10 flex h-[58dvh] max-h-[560px] min-h-[400px] items-center pt-12 pb-10 sm:pt-14 sm:pb-12 lg:inset-0 lg:h-auto lg:max-h-none lg:min-h-0 lg:pt-16 lg:pb-40"
       >
-        <div className="max-w-2xl">
+        <div className="relative max-w-2xl">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: easeOut, delay: 0.1 }}
-            className="text-base font-medium text-navy/80 sm:text-lg lg:text-xl"
+            className="text-base font-medium text-cream/85 [text-shadow:0_2px_18px_rgba(20,16,62,0.8)] sm:text-lg lg:text-xl"
           >
             Official AI &amp; ML Club of IIT Delhi
           </motion.p>
@@ -79,7 +114,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: easeOut, delay: 0.18 }}
-            className="mt-4 text-[clamp(2.75rem,10vw,6rem)] leading-[0.98] font-extrabold tracking-tight text-navy"
+            className="mt-4 text-[clamp(2.75rem,10vw,6rem)] leading-[0.98] font-extrabold tracking-tight text-cream [text-shadow:0_3px_32px_rgba(20,16,62,0.75)]"
           >
             Building the
             <br />
@@ -90,7 +125,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: easeOut, delay: 0.3 }}
-            className="mt-5 text-xl font-semibold text-navy sm:text-2xl lg:text-3xl"
+            className="mt-5 text-xl font-semibold text-cream/85 [text-shadow:0_2px_20px_rgba(20,16,62,0.8)] sm:text-2xl lg:text-3xl"
           >
             Research. Build. Create Impact.
           </motion.p>

@@ -7,7 +7,7 @@ const CONTACT_EMAIL = 'aries@iitd.ac.in'
 
 function Contact() {
   return (
-    <main className="px-8 py-10 max-w-5xl">
+    <main className="page-wrap py-10">
       <h1 className="text-4xl font-bold text-navy sm:text-6xl">
         Let&rsquo;s Connect!
       </h1>
@@ -52,8 +52,9 @@ function Contact() {
 
       <div className="card mt-12 p-8 sm:p-10">
         <p className="text-2xl leading-snug font-semibold text-navy sm:text-3xl">
-          &ldquo;We&rsquo;re here to collaborate, create and make an impact —
-          together.&rdquo;
+          Working on a paper, a workshop idea, or a project you want ARIES
+          involved in? Email us with a short brief and we&rsquo;ll route it
+          to the right wing.
         </p>
         <a
           href={`mailto:${CONTACT_EMAIL}?subject=Hey ARIES!`}

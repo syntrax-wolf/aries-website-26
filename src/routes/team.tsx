@@ -10,7 +10,7 @@ function Team() {
   const canvas = executives.filter((m) => m.wing === 'CANVAS')
 
   return (
-    <main className="px-8 py-10 max-w-5xl">
+    <main className="page-wrap py-10">
       <p className="tag">{teamYear}</p>
       <h1 className="mt-4 text-4xl font-bold text-navy sm:text-6xl">
         Meet the Team
@@ -20,10 +20,12 @@ function Team() {
         executives, and everyone who keeps ARIES shipping.
       </p>
 
-      <div className="card relative mt-10 flex h-64 items-center justify-center overflow-hidden bg-navy sm:h-80">
+      <div className="card card--dark relative mt-10 flex h-64 items-center overflow-hidden p-8 sm:h-80 sm:p-10">
         <AriesEmblem className="absolute -right-10 -bottom-10 h-64 w-64 text-white/10 sm:h-80 sm:w-80" />
-        <p className="z-10 text-sm font-semibold tracking-[0.2em] text-white/70 uppercase">
-          Full Team Photo — {teamYear}
+        <p className="z-10 max-w-md text-xl leading-snug font-semibold text-cream sm:text-2xl">
+          Every workshop, paper, and project on this site was built by the
+          people below — {teamYear}&rsquo;s roster of coordinators and
+          executives.
         </p>
       </div>
 
@@ -48,9 +50,7 @@ function Team() {
         </h2>
         <div className="mt-8 grid gap-10 lg:grid-cols-2">
           <div>
-            <p className="text-xs font-semibold tracking-[0.2em] text-[var(--ink-soft)] uppercase">
-              Brain
-            </p>
+            <span className="eyebrow">Brain</span>
             <div className="mt-4 grid gap-4">
               {brain.map((member) => (
                 <MemberCard
@@ -62,9 +62,7 @@ function Team() {
             </div>
           </div>
           <div>
-            <p className="text-xs font-semibold tracking-[0.2em] text-[var(--ink-soft)] uppercase">
-              Canvas
-            </p>
+            <span className="eyebrow">Canvas</span>
             <div className="mt-4 grid gap-4">
               {canvas.map((member) => (
                 <MemberCard
@@ -84,7 +82,8 @@ function Team() {
             Looking for someone who&rsquo;s graduated?
           </p>
           <p className="mt-1 text-[var(--ink-soft)]">
-            Our alumni are building, leading, and inspiring across the world.
+            See the coordinators and executives who came before this
+            year&rsquo;s roster.
           </p>
         </div>
         <Link

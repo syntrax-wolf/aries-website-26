@@ -12,7 +12,7 @@ export default function FaqList({ items }: { items: Faq[] }) {
         return (
           <div
             key={item.q}
-            className="rounded-3xl bg-white p-2 shadow-[0_18px_40px_-28px_rgba(23,19,67,0.4)]"
+            className="card p-2"
           >
             <button
               type="button"
@@ -44,7 +44,7 @@ export default function FaqList({ items }: { items: Faq[] }) {
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   className="overflow-hidden"
                 >
-                  <p className="mx-4 mb-3 rounded-2xl bg-lavender px-6 py-5 text-[15px] leading-relaxed text-navy/80">
+                  <p className="mx-4 mb-3 rounded-lg bg-lavender px-6 py-5 text-[15px] leading-relaxed text-navy/80">
                     {item.a}
                   </p>
                 </motion.div>

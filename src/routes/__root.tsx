@@ -3,13 +3,12 @@ import {
   Link,
   Scripts,
   createRootRoute,
-  useRouterState,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
 import Footer from '../components/Footer'
+import { SidebarProvider, useSidebar } from '../components/SidebarContext'
 
 import appCss from '../styles.css?url'
 
@@ -53,40 +52,50 @@ function NotFound() {
   )
 }
 
-function RootDocument({ children }: { children: React.ReactNode }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname })
-  const isHome = pathname === '/'
+/*
+ * One shell for every route: the navy rail runs floor-to-ceiling on the left,
+ * and all page content (footer included) lives in the column to its right.
+ * Keeping the footer inside that column — rather than full-bleed underneath
+ * the rail — is what makes the vertical edge read as continuous. The margin
+ * tracks the rail so the column reclaims the space when it's hidden.
+ */
+function Shell({ children }: { children: React.ReactNode }) {
+  const { hidden } = useSidebar()
 
+  return (
+    <div className="flex min-h-screen">
+      <Sidebar />
+      <div
+        className={`flex min-w-0 flex-1 flex-col transition-[margin] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          hidden ? 'lg:ml-0' : 'lg:ml-[240px]'
+        }`}
+      >
+        {/* Bottom bar spacer on mobile */}
+        <div className="flex flex-1 flex-col pb-16 lg:pb-0">
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-accent/30 selection:text-navy">
-        {isHome ? (
-          // Landing: transparent fixed header, full-bleed hero, no sidebar
-          <>
-            <Header />
-            {children}
-            <Footer />
-          </>
-        ) : (
-          // Inner pages: fixed sidebar + content area with top padding for mobile bar
-          <div className="flex min-h-screen">
-            <Sidebar />
-            {/* Content shifts right on desktop to clear the sidebar */}
-            <div className="flex flex-1 flex-col lg:ml-[210px]">
-              {/* Bottom bar spacer on mobile */}
-              <div className="pb-16 lg:pb-0">
-                {children}
-              </div>
-            </div>
-          </div>
+        <SidebarProvider>
+          <Shell>{children}</Shell>
+        </SidebarProvider>
+        {import.meta.env.DEV && (
+          <TanStackDevtools
+            config={{ position: 'bottom-right' }}
+            plugins={[{ name: 'Tanstack Router', render: <TanStackRouterDevtoolsPanel /> }]}
+          />
         )}
-        <TanStackDevtools
-          config={{ position: 'bottom-right' }}
-          plugins={[{ name: 'Tanstack Router', render: <TanStackRouterDevtoolsPanel /> }]}
-        />
         <Scripts />
       </body>
     </html>

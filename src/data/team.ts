@@ -29,4 +29,4 @@ export const executives: Member[] = [
   { name: 'Vivek Nair', role: 'Web & Product', wing: 'CANVAS' },
 ]
 
-export const teamYear = '2026 - 27'
+export const teamYear = '2026–27'

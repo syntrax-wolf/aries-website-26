@@ -16,7 +16,7 @@ function EventDetail() {
   const event = Route.useLoaderData()
 
   return (
-    <main className="px-8 py-10 max-w-5xl">
+    <main className="page-wrap py-10">
       <Link
         to="/events"
         className="text-sm font-semibold text-[var(--ink-soft)] no-underline hover:text-navy"
@@ -41,16 +41,16 @@ function EventDetail() {
             We&rsquo;re always looking for new collaborations.
           </p>
         </div>
-        <div className="flex flex-shrink-0 gap-3">
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-shrink-0 sm:flex-row">
           <Link
             to="/contact"
-            className="rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-cream no-underline"
+            className="rounded-full bg-navy px-5 py-3 text-center text-sm font-semibold whitespace-nowrap text-cream no-underline sm:py-2.5"
           >
             Contact Us
           </Link>
           <Link
             to="/events"
-            className="pill px-5 py-2.5 text-sm font-semibold text-navy no-underline"
+            className="pill px-5 py-3 text-center text-sm font-semibold whitespace-nowrap text-navy no-underline sm:py-2.5"
           >
             View More Events
           </Link>

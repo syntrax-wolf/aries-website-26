@@ -1,5 +1,7 @@
 node_modules
 .DS_Store
+.tmp-venv
+.tmp-hero
 dist
 dist-ssr
 *.local

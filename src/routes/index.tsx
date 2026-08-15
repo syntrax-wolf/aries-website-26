@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import {
   ArrowRightIcon,
   CalendarBlankIcon,
@@ -31,7 +31,7 @@ function Home() {
 
       {/* --- Stat strip (below the fold, own spacing) --- */}
       <section className="page-wrap relative z-10 pt-14 sm:pt-20">
-        <Reveal className="card grid grid-cols-2 gap-y-8 rounded-[2rem] bg-white/95 px-6 py-8 backdrop-blur sm:grid-cols-4 sm:divide-x sm:divide-[var(--line)] sm:px-4 sm:py-10">
+        <Reveal className="card grid grid-cols-2 gap-y-8 px-6 py-8 sm:grid-cols-4 sm:divide-x sm:divide-[var(--line)] sm:px-4 sm:py-10">
           {headlineStats.map((stat, i) => {
             const Icon = STAT_ICONS[i]
             return (
@@ -43,7 +43,7 @@ function Home() {
                 <p className="mt-4 text-3xl font-extrabold text-navy sm:text-5xl">
                   {stat.value}
                 </p>
-                <p className="mt-1 text-xs font-medium text-navy/60 sm:text-sm">
+                <p className="mt-1 text-xs font-medium text-[var(--ink-soft)] sm:text-sm">
                   {stat.label}
                 </p>
               </div>
@@ -53,7 +53,7 @@ function Home() {
       </section>
 
       {/* --- What we do + Aries dictionary --- */}
-      <section className="page-wrap grid gap-12 py-24 lg:grid-cols-2 lg:gap-16 lg:py-32">
+      <section className="page-wrap grid items-start gap-12 py-20 lg:grid-cols-2 lg:gap-16 lg:py-28">
         <div>
           <Reveal>
             <span className="eyebrow" data-both>
@@ -68,15 +68,12 @@ function Home() {
           <div className="mt-10 flex flex-col gap-5">
             {WHAT_WE_DO.map((item, i) => (
               <Reveal key={item.label} delay={0.08 * i}>
-                <div className="group flex items-center gap-4 rounded-[1.75rem] bg-white px-5 py-4 shadow-[0_20px_45px_-30px_rgba(23,19,67,0.5)] transition hover:-translate-y-0.5 sm:gap-5 sm:px-6 sm:py-5">
+                <div className="card flex items-center gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
                   <span className="icon-tile h-12 w-12 flex-shrink-0 sm:h-14 sm:w-14">
                     <item.icon className="h-6 w-6" weight="fill" />
                   </span>
                   <span className="flex-1 text-base font-bold text-navy sm:text-lg">
                     {item.label}
-                  </span>
-                  <span className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-lavender text-accent transition group-hover:bg-accent group-hover:text-white sm:h-11 sm:w-11">
-                    <ArrowRightIcon className="h-5 w-5" weight="bold" />
                   </span>
                 </div>
               </Reveal>
@@ -84,9 +81,9 @@ function Home() {
           </div>
         </div>
 
-        {/* Dictionary card */}
-        <Reveal delay={0.12} className="lg:pt-4">
-          <div className="relative h-full overflow-hidden rounded-[2rem] bg-navy p-9 text-cream shadow-[0_40px_80px_-40px_rgba(23,19,67,0.7)] sm:p-12">
+        {/* Dictionary card — sticks so the column never bottoms out early */}
+        <Reveal delay={0.12} className="lg:sticky lg:top-12">
+          <div className="card card--dark relative overflow-hidden p-8 sm:p-10">
             <span className="absolute top-8 right-9 h-3 w-3 rounded-full bg-accent-soft" />
             <span
               aria-hidden
@@ -126,7 +123,7 @@ function Home() {
       {/* --- FAQ --- */}
       <section className="bg-lavender py-24 lg:py-32">
         <div className="page-wrap grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <div className="lg:sticky lg:top-32 lg:self-start">
+          <div className="lg:sticky lg:top-12 lg:self-start">
             <Reveal>
               <span className="eyebrow" data-both>
                 FAQs
@@ -137,9 +134,36 @@ function Home() {
                 Asked{' '}
                 <span className="accent-mark">Questions</span>
               </h2>
-              <p className="mt-6 max-w-xs text-lg leading-relaxed text-navy/60">
+              <p className="mt-6 max-w-xs text-lg leading-relaxed text-[var(--ink-soft)]">
                 Everything you need to know about Aries and how to get involved.
               </p>
+            </Reveal>
+
+            {/*
+             * This column used to run out of content and leave a large void
+             * beside the accordion. A closing prompt both fills it and gives
+             * the section somewhere to send people.
+             */}
+            <Reveal delay={0.12}>
+              <div className="card mt-10 max-w-sm p-6">
+                <p className="text-base font-bold text-navy">
+                  Still have questions?
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
+                  Reach out and we&rsquo;ll get back to you within 24&ndash;48
+                  hours.
+                </p>
+                <Link
+                  to="/contact"
+                  className="group mt-5 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-semibold text-cream no-underline transition hover:-translate-y-0.5 hover:bg-navy-soft"
+                >
+                  Talk to us
+                  <ArrowRightIcon
+                    weight="bold"
+                    className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                  />
+                </Link>
+              </div>
             </Reveal>
           </div>
 

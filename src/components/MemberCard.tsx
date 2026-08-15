@@ -17,8 +17,8 @@ export default function MemberCard({
   subtitle?: string
 }) {
   return (
-    <div className="card flex items-center gap-4 p-5">
-      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-navy text-sm font-bold text-cream">
+    <div className="card flex items-center gap-4 p-6">
+      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-[var(--line)] bg-navy text-xs font-bold tracking-wide text-cream">
         {initials(name)}
       </div>
       <div className="min-w-0">

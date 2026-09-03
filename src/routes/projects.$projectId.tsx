@@ -40,7 +40,7 @@ function ProjectDetail() {
           {project.category}
         </span>
 
-        <h1 className="mt-4 text-3xl font-extrabold text-navy sm:text-4xl">
+        <h1 className="page-title mt-4">
           {project.name}
         </h1>
         {project.contributors && (

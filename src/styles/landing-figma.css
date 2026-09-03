@@ -1,0 +1,672 @@
+:root {
+  --aries-ink: #080c35;
+  --aries-ink-soft: #171733;
+  --aries-muted: #565872;
+  --aries-violet: #5a24e8;
+  --aries-violet-light: #a873ff;
+  --aries-border: rgba(77, 46, 143, 0.12);
+  --aries-white: rgba(255, 255, 255, 0.86);
+}
+
+.aries-landing-shell {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--aries-ink);
+}
+
+.aries-section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--aries-violet);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.aries-section-label::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--aries-violet);
+  content: "";
+}
+
+.aries-section-label::after {
+  width: 40px;
+  height: 3px;
+  background: var(--aries-violet);
+  content: "";
+}
+
+.aries-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 134px 6vw 90px;
+  background:
+    radial-gradient(circle at 84% 84%, rgba(118, 80, 255, 0.09), rgba(118, 80, 255, 0) 21%),
+    radial-gradient(circle at 38% 76%, rgba(118, 80, 255, 0.06), rgba(118, 80, 255, 0) 24%),
+    linear-gradient(180deg, #e3d9ff 0%, #fff8f0 72%, #fbfaff 100%);
+}
+
+.aries-hero__grid {
+  display: grid;
+  max-width: 1380px;
+  margin: 0 auto;
+  grid-template-columns: minmax(0, 0.92fr) minmax(480px, 1.08fr);
+  gap: 80px;
+  align-items: start;
+}
+
+.aries-hero__title {
+  max-width: 570px;
+  margin: 36px 0 28px;
+  color: var(--aries-ink);
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.19;
+}
+
+.aries-hero__title em {
+  color: var(--aries-violet);
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 7px;
+}
+
+.aries-hero__copy {
+  max-width: 520px;
+  margin: 0 0 42px;
+  color: #1b1c3d;
+  font-size: 22px;
+  line-height: 1.62;
+}
+
+.aries-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: center;
+}
+
+.aries-button {
+  display: inline-flex;
+  min-height: 57px;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  border-radius: 9px;
+  color: inherit;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.aries-button--primary {
+  min-width: 270px;
+  padding: 0 30px;
+  color: #fff;
+  background: linear-gradient(135deg, #4f19de 0%, #7443ff 100%);
+  box-shadow: 0 15px 16px rgba(73, 32, 210, 0.2);
+}
+
+.aries-button--ghost {
+  color: var(--aries-violet);
+}
+
+.aries-hero-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 666px;
+  padding: 72px 64px;
+  border: 1.5px solid rgba(77, 46, 143, 0.11);
+  border-radius: 15px;
+  background:
+    radial-gradient(circle at 84% 79%, rgba(98, 40, 244, 0.62), rgba(132, 93, 255, 0.24) 11%, rgba(132, 93, 255, 0) 25%),
+    radial-gradient(circle at 78% 21%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0) 12%),
+    radial-gradient(circle at 89% 51%, rgba(88, 36, 232, 0.56), rgba(88, 36, 232, 0) 13%),
+    linear-gradient(135deg, #fff 0%, #fbf8ff 54%, #eee5ff 100%);
+  box-shadow: 0 20px 44px rgba(44, 26, 90, 0.05);
+}
+
+.aries-hero-card__spark {
+  position: absolute;
+  top: 78px;
+  right: 156px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: #7650ff;
+  box-shadow: 0 0 12px rgba(118, 80, 255, 0.65);
+}
+
+.aries-hero-card h2 {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.aries-hero-card__pronunciation {
+  margin: 12px 0 2px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.aries-hero-card__type {
+  margin: 0;
+  color: var(--aries-violet);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.aries-hero-card__rule {
+  width: 268px;
+  height: 1px;
+  margin: 24px 0 31px;
+  background: rgba(77, 46, 143, 0.23);
+}
+
+.aries-hero-card__definition {
+  max-width: 522px;
+  margin: 0 0 34px;
+  color: #090b2c;
+  font-size: 20px;
+  line-height: 1.52;
+}
+
+.aries-hero-card__facts {
+  display: grid;
+  gap: 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aries-hero-card__facts li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 22px;
+  align-items: center;
+  color: #171732;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.aries-hero-card__facts img {
+  width: 29px;
+  height: 29px;
+  object-fit: contain;
+}
+
+.aries-whatwedo {
+  position: relative;
+  max-width: 1381px;
+  margin: 20px auto 28px;
+  padding: 0 6vw;
+}
+
+.aries-whatwedo__strip {
+  display: grid;
+  overflow: hidden;
+  min-height: 255px;
+  border-radius: 23px 23px 0 0;
+  background: #070711;
+  grid-template-columns: repeat(5, minmax(190px, 1fr));
+}
+
+.aries-work-tile {
+  position: relative;
+  isolation: isolate;
+  min-height: 255px;
+  overflow: hidden;
+  padding: 45px 36px 34px;
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+  text-decoration: none;
+}
+
+.aries-work-tile:last-child {
+  border-right: 0;
+}
+
+.aries-work-tile {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.45s ease;
+  z-index: 1;
+}
+
+/* First tile: subtle light/white overlay */
+.aries-work-tile:first-child::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+}
+
+/* Last four tiles: dark overlay */
+.aries-work-tile:not(:first-child)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(5, 5, 20, 0.55);
+  pointer-events: none;
+}
+
+/* Images stay at their normal size */
+.aries-work-tile__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Whole tile expands on hover */
+.aries-work-tile:hover,
+.aries-work-tile--image-expanded {
+  transform: scale(1.08);
+  z-index: 10;
+  box-shadow: 0 18px 45px rgba(20, 10, 60, 0.3);
+}
+
+.aries-work-tile--image-expanded::after {
+  background: rgba(255, 255, 255, 0.32) !important;
+}
+
+/* Keep icons and text above the overlay */
+.aries-work-tile__icon,
+.aries-work-tile__title,
+.aries-work-tile__number {
+  position: relative;
+  z-index: 2;
+}
+.aries-work-tile::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 30% 12%, rgba(143, 98, 255, 0.35), rgba(143, 98, 255, 0) 24%),
+    linear-gradient(110deg, rgba(11, 9, 29, 0.96) 0%, rgba(8, 8, 20, 0.72) 100%);
+  content: "";
+}
+
+.aries-work-tile:first-child::after {
+  background: linear-gradient(90deg, rgba(255, 244, 229, 0.52), rgba(9, 8, 27, 0.2));
+}
+
+.aries-work-tile__icon {
+  width: 51px;
+  height: 51px;
+  margin-bottom: 26px;
+  object-fit: contain;
+}
+
+.aries-work-tile__title {
+  margin: 0 0 15px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.aries-work-tile:first-child .aries-work-tile__title {
+  color: #5b4fe9;
+}
+
+.aries-work-tile__number {
+  display: block;
+  color: var(--aries-violet-light);
+  font-size: 46px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.aries-work-tile:first-child .aries-work-tile__number {
+  color: #310081;
+}
+
+.aries-whatwedo__timeline {
+  position: relative;
+  max-width: 1293px;
+  height: 28px;
+  margin: 0 auto;
+}
+
+.aries-whatwedo__timeline::before {
+  position: absolute;
+  top: 17px;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(91, 34, 233, 0.09), rgba(91, 34, 233, 0.35), rgba(91, 34, 233, 0.13));
+  content: "";
+}
+
+.aries-whatwedo__dot {
+  position: absolute;
+  top: 9px;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #5b22e9;
+  border-radius: 999px;
+  background: #fff8f0;
+  transform: translateX(-50%);
+}
+
+.aries-whatwedo__dot:first-child {
+  background: #5b22e9;
+  box-shadow: 0 0 0 6px rgba(91, 34, 233, 0.05);
+}
+
+.aries-faq-section {
+  background:
+    radial-gradient(circle at 46% 5%, rgba(118, 80, 255, 0.05), rgba(118, 80, 255, 0) 25%),
+    linear-gradient(180deg, #fff8f0 0%, #fbfaff 100%);
+}
+
+.aries-faq-section {
+  background:
+    radial-gradient(circle at 46% 5%, rgba(118, 80, 255, 0.05), rgba(118, 80, 255, 0) 25%),
+    linear-gradient(180deg, #fff8f0 0%, #fbfaff 100%);
+}
+
+.aries-faq-footer {
+  background:
+    radial-gradient(circle at 46% 5%, rgba(118, 80, 255, 0.05), rgba(118, 80, 255, 0) 25%),
+    linear-gradient(180deg, #fff8f0 0%, #fbfaff 82%, #120748 82%, #10063b 100%);
+}
+
+.aries-faq {
+  display: grid;
+  max-width: 1347px;
+  margin: 0 auto;
+  padding: 80px 6vw 110px;
+  grid-template-columns: 324px minmax(0, 1fr);
+  gap: 78px;
+  align-items: start;
+}
+
+.aries-faq__title {
+  margin: 30px 0 18px;
+  color: #12104e;
+  font-size: 50px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.06;
+}
+
+.aries-faq__title span {
+  display: block;
+  color: var(--aries-violet);
+}
+
+.aries-faq__copy {
+  max-width: 324px;
+  margin: 0;
+  color: var(--aries-muted);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.aries-faq__list {
+  overflow: hidden;
+  margin: 0;
+  border: 1.5px solid var(--aries-border);
+  border-radius: 12px;
+  background: var(--aries-white);
+}
+
+.aries-faq__item {
+  border-bottom: 1.5px solid rgba(77, 46, 143, 0.1);
+}
+
+.aries-faq__item:last-child {
+  border-bottom: 0;
+}
+
+.aries-faq__question {
+  display: grid;
+  width: 100%;
+  min-height: 66px;
+  padding: 0 24px 0 30px;
+  border: 0;
+  background: transparent;
+  color: #121342;
+  cursor: pointer;
+  font: inherit;
+  grid-template-columns: 52px minmax(0, 1fr) 28px;
+  gap: 16px;
+  align-items: center;
+  text-align: left;
+}
+
+.aries-faq__number {
+  color: var(--aries-violet);
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+}
+
+.aries-faq__text {
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.aries-faq__plus {
+  color: var(--aries-violet);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: right;
+}
+
+.aries-faq__answer {
+  margin: 0;
+  padding: 0 24px 18px 98px;
+  color: var(--aries-muted);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.aries-footer {
+  position: relative;
+  overflow: hidden;
+  min-height: 215px;
+  padding: 34px 6vw 42px;
+  color: #081634;
+  background:
+    radial-gradient(circle at 79% 36%, rgba(120, 82, 255, 0.95), rgba(120, 82, 255, 0) 18%),
+    radial-gradient(circle at 20% 75%, rgba(120, 82, 255, 0.75), rgba(76, 51, 168, 0.28) 13%, rgba(33, 19, 81, 0) 24%),
+    radial-gradient(circle at 94% 67%, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0) 16%),
+    linear-gradient(90deg, #e0d8ff 0%, #7861dd 58%, #b5a6ff 100%);
+}
+
+.aries-footer__inner {
+  display: grid;
+  max-width: 1380px;
+  margin: 0 auto;
+  grid-template-columns: 260px 1fr auto;
+  gap: 86px;
+  align-items: center;
+}
+
+.aries-footer__brand-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.aries-footer__mark {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.aries-footer__brand {
+  color: #08124b;
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 12px;
+  line-height: 1;
+}
+
+.aries-footer__tagline {
+  max-width: 212px;
+  margin: 15px 0 0;
+  color: #081634;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.aries-footer__menus {
+  display: flex;
+  gap: 95px;
+  justify-content: center;
+  align-items: center;
+}
+
+.aries-footer__menu {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: #1f085b;
+  font-size: 18px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.aries-footer__chevron {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.aries-footer__socials {
+  display: flex;
+  gap: 34px;
+  align-items: center;
+}
+
+.aries-footer__socials a {
+  color: #07113c;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+  text-decoration: none;
+}
+
+@media (max-width: 1080px) {
+  .aries-hero__grid,
+  .aries-faq,
+  .aries-footer__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .aries-hero__grid {
+    gap: 48px;
+  }
+
+  .aries-whatwedo__strip {
+    overflow-x: auto;
+    grid-template-columns: repeat(5, 276px);
+  }
+
+  .aries-footer__menus {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 720px) {
+  .aries-hero {
+    padding: 96px 22px 64px;
+  }
+
+  .aries-hero__title {
+    font-size: 42px;
+  }
+
+  .aries-hero__copy {
+    font-size: 18px;
+  }
+
+  .aries-hero-card {
+    min-height: auto;
+    padding: 40px 26px;
+  }
+
+  .aries-hero-card h2 {
+    font-size: 42px;
+  }
+
+  .aries-hero-card__spark {
+    top: 34px;
+    right: 28px;
+  }
+
+  .aries-hero-card__definition,
+  .aries-hero-card__pronunciation,
+  .aries-hero-card__type {
+    font-size: 17px;
+  }
+
+  .aries-hero-card__facts li {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 14px;
+    font-size: 16px;
+  }
+
+  .aries-whatwedo {
+    padding: 0 22px;
+  }
+
+  .aries-faq {
+    padding: 58px 22px 84px;
+    gap: 34px;
+  }
+
+  .aries-faq__title {
+    font-size: 40px;
+  }
+
+  .aries-faq__question {
+    min-height: 72px;
+    padding: 0 18px;
+    grid-template-columns: 40px minmax(0, 1fr) 24px;
+    gap: 12px;
+  }
+
+  .aries-faq__text {
+    font-size: 16px;
+  }
+
+  .aries-footer {
+    padding: 34px 22px 40px;
+  }
+
+  .aries-footer__inner {
+    gap: 36px;
+  }
+
+  .aries-footer__menus,
+  .aries-footer__socials {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+}

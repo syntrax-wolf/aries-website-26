@@ -16,6 +16,8 @@ export default function MemberCard({
   role: string
   subtitle?: string
 }) {
+  if (!name.trim()) return null
+
   return (
     <div className="card flex items-center gap-4 p-6">
       <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-[var(--line)] bg-navy text-xs font-bold tracking-wide text-cream">

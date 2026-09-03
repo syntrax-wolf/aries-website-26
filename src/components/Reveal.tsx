@@ -7,7 +7,7 @@ const easeOut = [0.16, 1, 0.3, 1] as const
 export default function Reveal({
   children,
   delay = 0,
-  y = 24,
+  y = 32,
   className,
 }: {
   children: ReactNode
@@ -22,8 +22,8 @@ export default function Reveal({
       className={className}
       initial={reduce ? false : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.7, ease: easeOut, delay }}
+      viewport={{ once: true, amount: 0.2, margin: '0px 0px -8% 0px' }}
+      transition={{ duration: reduce ? 0 : 0.85, ease: easeOut, delay }}
     >
       {children}
     </motion.div>

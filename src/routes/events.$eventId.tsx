@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import Reveal from '../components/Reveal'
 import { mostRecentEvent, pastEvents, upcomingEvents } from '../data/events'
 
 const allEvents = [mostRecentEvent, ...upcomingEvents, ...pastEvents]
@@ -16,7 +17,7 @@ function EventDetail() {
   const event = Route.useLoaderData()
 
   return (
-    <main className="page-wrap py-10">
+    <main className="page-wrap py-10 pb-20">
       <Link
         to="/events"
         className="text-sm font-semibold text-[var(--ink-soft)] no-underline hover:text-navy"
@@ -24,13 +25,11 @@ function EventDetail() {
         ← Back to Events
       </Link>
 
-      <p className="tag mt-6">{event.date}</p>
-      <h1 className="mt-4 text-4xl font-bold text-navy sm:text-5xl">
-        {event.name}
-      </h1>
-      <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--ink-soft)]">
-        {event.blurb}
-      </p>
+      <Reveal>
+        <p className="tag mt-6">{event.date}</p>
+        <h1 className="page-title mt-4">{event.name}</h1>
+        <p className="page-lede max-w-2xl">{event.blurb}</p>
+      </Reveal>
 
       <div className="card mt-16 flex flex-col items-start justify-between gap-6 p-8 sm:flex-row sm:items-center">
         <div>

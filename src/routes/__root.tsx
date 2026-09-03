@@ -86,7 +86,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-accent/30 selection:text-navy">
+      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-navy/15 selection:text-navy">
         <SidebarProvider>
           <Shell>{children}</Shell>
         </SidebarProvider>

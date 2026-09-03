@@ -128,13 +128,13 @@ export default function Sidebar() {
                 aria-current={active ? 'page' : undefined}
                 className={`group relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold no-underline transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none ${
                   active
-                    ? 'bg-accent text-white shadow-[0_10px_24px_-12px_rgba(91,40,217,0.75)]'
-                    : 'text-navy/70 hover:bg-lavender hover:text-accent'
+                    ? 'bg-navy text-cream'
+                    : 'text-navy/70 hover:bg-navy/[0.05] hover:text-navy'
                 }`}
               >
                 <Icon
                   className={`h-5 w-5 flex-shrink-0 transition-colors ${
-                    active ? 'text-white' : 'text-navy/45 group-hover:text-accent'
+                    active ? 'text-cream' : 'text-navy/45 group-hover:text-navy'
                   }`}
                   weight={active ? 'fill' : 'regular'}
                 />
@@ -162,8 +162,8 @@ export default function Sidebar() {
             aria-current={isActive('/alumni') ? 'page' : undefined}
             className={`group flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold no-underline transition-all focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none ${
               isActive('/alumni')
-                ? 'bg-accent text-white shadow-[0_10px_24px_-12px_rgba(91,40,217,0.75)]'
-                : 'text-navy/45 hover:bg-lavender hover:text-accent'
+                ? 'bg-navy text-cream'
+                : 'text-navy/45 hover:bg-navy/[0.05] hover:text-navy'
             }`}
           >
             <GraduationCap
@@ -185,7 +185,7 @@ export default function Sidebar() {
               to={to}
               aria-current={active ? 'page' : undefined}
               className={`flex flex-col items-center gap-1 rounded-lg px-2.5 py-1.5 text-[10px] font-semibold no-underline transition-colors ${
-                active ? 'text-accent' : 'text-navy/50'
+                active ? 'text-navy' : 'text-navy/50'
               }`}
             >
               <Icon className="h-5 w-5" weight={active ? 'fill' : 'regular'} />

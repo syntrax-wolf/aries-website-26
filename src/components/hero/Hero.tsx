@@ -24,22 +24,19 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative flex flex-col overflow-hidden lg:min-h-[100dvh]"
+      className="relative flex min-h-[100dvh] flex-col overflow-hidden"
     >
       {/*
-       * Mobile only: the sky (moon + starfield) is its own boxed scene at the
-       * top of the hero — normal document flow, fixed-ish height — with the
-       * stag rendered as a separate block immediately after it. That keeps
-       * the two from ever overlapping, so the moon can't paint over the
-       * silhouette (which is what made the stag disappear entirely on narrow
-       * screens) and the stag isn't a cropped, dominant, full-bleed slab.
-       * At lg+ this box switches back to `absolute inset-0` — i.e. the exact
-       * full-bleed layer the desktop composition has always used.
+       * One frame on every breakpoint — the PR desktop stack. Sky stays in
+       * its own isolated context (z-0) so the moon cannot paint over the
+       * stag; the stag is a sibling at z-[3], contain-sized, never a
+       * full-bleed cover crop. Mobile drops the extra 140% parallax zoom
+       * so more of the dusk plate stays in the first screen.
        */}
-      <div className="relative isolate h-[58dvh] max-h-[560px] min-h-[400px] overflow-hidden lg:absolute lg:inset-0 lg:z-0 lg:h-auto lg:max-h-none lg:min-h-0">
+      <div className="absolute inset-0 isolate z-0 overflow-hidden">
         <motion.div
           style={{ y: sky }}
-          className="absolute inset-x-0 -top-[15%] z-0 h-[140%]"
+          className="absolute inset-0 z-0 lg:inset-x-0 lg:-top-[15%] lg:h-[140%]"
         >
           <Clouds />
           <FallingStars />
@@ -71,36 +68,32 @@ export default function Hero() {
       </div>
 
       {/*
-       * Stag — a normal-flow block right after the sky scene on mobile, so it
-       * reads as its own beat below the moon rather than a cropped backdrop.
-       * At lg+: absolute, bottom-anchored, in front of the sky — byte-identical
-       * to the original desktop composition.
+       * Stag — same bottom-anchored overlay as desktop. On a phone the plate
+       * is a bit wider than the viewport and right-weighted so the circuit
+       * antlers read without becoming a cropped slab; lg+ is w-full contain.
        */}
       <motion.div
         style={{ y: deer }}
-        className="relative z-0 lg:absolute lg:inset-x-0 lg:bottom-0 lg:z-[3]"
+        className="absolute inset-x-0 bottom-0 z-[3]"
       >
         <img
           src="/deer_cleaned.png"
           alt="A stag with circuit-board antlers standing on a cliff at sunset"
-          className="h-auto w-full object-contain object-bottom select-none"
+          className="block h-auto w-[165%] max-w-none -ml-[40%] object-contain object-bottom select-none lg:ml-0 lg:w-full"
           draggable={false}
         />
         <div className="absolute inset-x-0 bottom-0 z-[5] h-28 bg-gradient-to-b from-transparent to-cream" />
       </motion.div>
 
       {/*
-       * Hero copy. Absolutely positioned so it overlays the sky scene (the
-       * cream text needs that dark backdrop to stay legible) rather than
-       * taking its own slot in the flow. On mobile it matches the sky box's
-       * own height exactly; at lg+ it covers the full section, reproducing
-       * the original flex-centered composition.
+       * Hero copy overlays the dusk sky. Mobile sits it at the top so it
+       * clears the stag; lg+ is the original vertically-centered lockup.
        */}
       <motion.div
         style={{ y: copy }}
-        className="page-wrap absolute inset-x-0 top-0 z-10 flex h-[58dvh] max-h-[560px] min-h-[400px] items-center pt-12 pb-10 sm:pt-14 sm:pb-12 lg:inset-0 lg:h-auto lg:max-h-none lg:min-h-0 lg:pt-16 lg:pb-40"
+        className="page-wrap absolute inset-0 z-10 flex items-start pt-10 pb-28 sm:items-center sm:pt-14 sm:pb-12 lg:pt-16 lg:pb-40"
       >
-        <div className="relative max-w-2xl">
+        <div className="relative max-w-[16rem] sm:max-w-2xl">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -114,7 +107,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: easeOut, delay: 0.18 }}
-            className="mt-4 text-[clamp(2.75rem,10vw,6rem)] leading-[0.98] font-extrabold tracking-tight text-cream [text-shadow:0_3px_32px_rgba(20,16,62,0.75)]"
+            className="mt-3 text-[clamp(2.4rem,9.5vw,6rem)] leading-[0.98] font-extrabold tracking-tight text-cream [text-shadow:0_3px_32px_rgba(20,16,62,0.75)] sm:mt-4 sm:text-[clamp(2.75rem,10vw,6rem)]"
           >
             Building the
             <br />
@@ -125,7 +118,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: easeOut, delay: 0.3 }}
-            className="mt-5 text-xl font-semibold text-cream/85 [text-shadow:0_2px_20px_rgba(20,16,62,0.8)] sm:text-2xl lg:text-3xl"
+            className="mt-3 text-lg font-semibold text-cream/85 [text-shadow:0_2px_20px_rgba(20,16,62,0.8)] sm:mt-5 sm:text-2xl lg:text-3xl"
           >
             Research. Build. Create Impact.
           </motion.p>
